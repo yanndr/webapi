@@ -10,7 +10,7 @@ type ServerConfiguration struct {
 	Port               string `json:"port"`
 	PrivateKeyPath     string `json:"privateKeyPath"`
 	PublicKeyPath      string `json:"publicKeyPath"`
-	JWTExpirationDelta int
+	JWTExpirationDelta int    `json:"jWTExpirationDelta"`
 }
 
 var configuration ServerConfiguration

@@ -11,6 +11,7 @@ func InitRoutes() *mux.Router {
 	router := mux.NewRouter()
 	SetEntityRoutes(router)
 	SetEntityAuthRoutes(router)
+	SetAuthenticationRoutes(router)
 	return router
 }
 
@@ -29,7 +30,6 @@ func SetEntityAuthRoutes(router *mux.Router) {
 			negroni.HandlerFunc(middleware.RequireTokenAuthentication),
 			negroni.HandlerFunc(controller.GetEntities),
 		)).Methods("GET")
-
 }
 
 func SetAuthenticationRoutes(router *mux.Router) {

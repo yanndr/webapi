@@ -19,6 +19,10 @@ func RequireTokenAuthentication(rw http.ResponseWriter, req *http.Request, next 
 		}
 	})
 
+	fmt.Printf("Token: %v /n", token)
+	fmt.Printf("Token valid: %v /n", token.Valid)
+	fmt.Printf("err: %v /n", err)
+
 	if err == nil && token.Valid && !authBackend.IsInBlacklist(req.Header.Get("Authorization")) {
 		next(rw, req)
 	} else {

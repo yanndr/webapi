@@ -1,5 +1,6 @@
 {
   "port": ":3000",
   "privateKeyPath": "../key/private_key",
-  "publicKeyPath": "../key/public_key"
+  "publicKeyPath": "../key/public_key",
+  "jWTExpirationDelta": 72
 }
