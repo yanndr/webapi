@@ -31,3 +31,7 @@ func SetEntityAuthRoutes(router *mux.Router) {
 		)).Methods("GET")
 
 }
+
+func SetAuthenticationRoutes(router *mux.Router) {
+	router.HandleFunc("/token-auth", controller.Login).Methods("POST")
+}
