@@ -1,10 +1,10 @@
 package mapper
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/yanndr/webapi/database"
+	"github.com/yanndr/webapi/model"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -19,7 +19,17 @@ func CreateUser(username, password string) (int, error) {
 		return 0, err
 	}
 
-	fmt.Println("last inserted id =", lastInsertId)
-
 	return lastInsertId, nil
+}
+
+func GetUser(username string) (*model.User, error) {
+
+	var user = model.User{}
+	err := database.DBCon.QueryRow("Select \"Id\", \"Username\",\"Password\" From \"User\" Where \"Username\"=$1;", username).Scan(&user.UUID, &user.Username, &user.Password)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &user, nil
 }

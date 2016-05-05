@@ -8,12 +8,8 @@ import (
 	"os"
 	"time"
 
-	"golang.org/x/crypto/bcrypt"
-
 	"github.com/dgrijalva/jwt-go"
-	"github.com/pborman/uuid"
 	"github.com/yanndr/webapi/config"
-	"github.com/yanndr/webapi/model"
 )
 
 type JWTAuthenticationBackend struct {
@@ -63,18 +59,6 @@ func getPrivateKey() *rsa.PrivateKey {
 	}
 
 	return privateKeyImported
-}
-
-func (backend *JWTAuthenticationBackend) Authenticate(user *model.User) bool {
-	hashedPassword, _ := bcrypt.GenerateFromPassword([]byte("testing"), 10)
-
-	testUser := model.User{
-		UUID:     uuid.New(),
-		Username: "haku",
-		Password: string(hashedPassword),
-	}
-
-	return user.Username == testUser.Username && bcrypt.CompareHashAndPassword([]byte(testUser.Password), []byte(user.Password)) == nil
 }
 
 func (backend *JWTAuthenticationBackend) GenerateToken(userUUID string) (string, error) {
